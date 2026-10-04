@@ -1,0 +1,6 @@
+node_modules
+# Canonical two-line @AGENTS.md pointer; prettier would add a blank line.
+/CLAUDE.md
+/plugins/*/CLAUDE.md
+/skills/*/CLAUDE.md
+pnpm-lock.yaml

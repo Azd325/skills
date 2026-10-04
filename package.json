@@ -1,0 +1,16 @@
+{
+  "name": "azd325-skills",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node scripts/require-tests.ts && pnpm -r test",
+    "check": "pnpm run format:check && pnpm run typecheck && pnpm run test",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "prettier": "3.9.9"
+  }
+}

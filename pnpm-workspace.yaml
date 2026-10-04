@@ -1,0 +1,5 @@
+packages:
+  - plugins/*
+  - skills/*
+
+minimumReleaseAge: 10080

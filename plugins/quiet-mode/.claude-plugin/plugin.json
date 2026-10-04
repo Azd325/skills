@@ -1,0 +1,9 @@
+{
+  "name": "quiet-mode",
+  "version": "0.0.0",
+  "description": "Scaffold, blocks nothing yet. Will stop unattended coding agents from reaching coworkers while the mode is on.",
+  "author": {
+    "name": "Tim Kleinschmidt"
+  },
+  "license": "MIT"
+}

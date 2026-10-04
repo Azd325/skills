@@ -1,0 +1,19 @@
+{
+  "name": "quiet-mode",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Scaffold, blocks nothing yet. Will stop unattended coding agents from reaching coworkers while the mode is on.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "test -n \"$(find tests -name '*.test.ts')\" || { echo 'No test files in tests/' >&2; exit 1; }; node --test \"tests/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "typescript": "^7.0.2"
+  }
+}

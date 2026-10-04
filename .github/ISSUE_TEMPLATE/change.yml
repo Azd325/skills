@@ -1,0 +1,25 @@
+name: Change
+description: Propose a feature or a change to a package.
+labels: [enhancement]
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: The folder name, for example `plugins/quiet-mode`.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should change, and which problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: vision
+    attributes:
+      label: Vision check
+      description: Quote the line of the package's VISION.md that this change aligns with. If it conflicts with a line, quote that line too.
+    validations:
+      required: true

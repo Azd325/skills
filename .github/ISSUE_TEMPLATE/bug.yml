@@ -1,0 +1,31 @@
+name: Bug
+description: A package does something its README or VISION.md says it does not do.
+labels: [bug]
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: The folder name, for example `plugins/quiet-mode`.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The tool call or command, what you expected, and what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Harness and version (for example Claude Code 2.3.1 or pi 1.0.2), OS and Node version.
+    validations:
+      required: true
