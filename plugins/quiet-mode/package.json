@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": ">=26"
   },
   "scripts": {
     "test": "test -n \"$(find tests -name '*.test.ts')\" || { echo 'No test files in tests/' >&2; exit 1; }; node --test \"tests/**/*.test.ts\"",
