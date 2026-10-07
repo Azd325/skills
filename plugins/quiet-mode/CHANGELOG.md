@@ -5,6 +5,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- The minimum Node version is now 26 (`engines.node` is `>=26`), and CI runs on Node 26.
+
 ### Added
 
 - `VISION.md`: the acceptance policy for the package.

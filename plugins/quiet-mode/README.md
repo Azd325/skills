@@ -23,7 +23,7 @@ Status: scaffold. The guard is not built yet, so nothing is blocked.
 
 ## Develop
 
-Node 24 or later runs the TypeScript sources directly. There is no build step; `tsc` only type-checks.
+Node 26 or later runs the TypeScript sources directly. There is no build step; `tsc` only type-checks.
 
 ```sh
 pnpm install
