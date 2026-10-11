@@ -41,9 +41,9 @@ pnpm install
 pnpm run check
 ```
 
-CI tests consume a copied skill from a scratch home, resolve its resources, and check that each scenario's
-decisive rule is present and that removing it makes the scenario go red. They do not claim that finding
-prompt phrases proves agent behavior, and do not call a live model.
+CI tests consume a copied skill from a scratch home and resolve its resources. They also test the evaluation
+oracle, the assessment parser and the rule-removal helper on synthetic policy text. They do not read prompt
+wording as proof of agent behavior and do not call a live model.
 
 Development evaluation is explicit and uses synthetic evidence only:
 

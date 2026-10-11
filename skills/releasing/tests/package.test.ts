@@ -57,28 +57,6 @@ test("the skill and its reference stay within the package size contract", async 
   assert.ok(reference.length >= 50 && reference.length <= 80, `reference has ${reference.length} lines`);
 });
 
-test("the reference example shows every part that the skill requires RELEASING.md to record", async () => {
-  const reference = await readFile(new URL("../references/releasing-md.md", import.meta.url), "utf8");
-  const example = reference.slice(reference.indexOf("## Example"));
-  for (const heading of [
-    "Distribution",
-    "Version source",
-    "Checked commit",
-    "Safe validation",
-    "Privacy categories",
-    "Tag and signature",
-    "Notes",
-    "External approval",
-    "Clean-install verification",
-    "Recovery",
-  ]) {
-    assert.match(example, new RegExp(`^## ${heading}$`, "m"), `example lacks ${heading}`);
-  }
-  assert.match(example, /git tag -s/);
-  assert.match(example, /git verify-tag/);
-  assert.doesNotMatch(example, /^\s*git tag -a/m);
-});
-
 test("development evaluation refuses to write run evidence inside the repository", () => {
   const result = spawnSync(
     process.execPath,

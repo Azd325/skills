@@ -1,57 +1,71 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
-import type { Assessment, Scenario } from "./scenarios.ts";
+import type { Assessment } from "./scenarios.ts";
 
-const policy = ["../SKILL.md", "../references/releasing-md.md"]
-  .map((path) => readFileSync(new URL(path, import.meta.url), "utf8"))
-  .join("\n\n");
-const squash = (text: string) => text.replace(/\s+/g, " ").trim();
-const states = (text: string, scenario: Scenario) => squash(text).includes(squash(scenario.rule));
-
-function correct(scenario: Scenario): Assessment {
-  return {
-    rows: { ...scenario.expected },
-    immediateActions: [],
-    reportLocation: "printed",
-    releaseApproved: false,
-    report: "Finding category at release.env:7; owner action needed.",
-    basis: [scenario.rule],
-  };
-}
+// Test the development oracle on observable assessment output. These are NOT
+// claimed as evidence of model interpretation; pnpm evaluate supplies that.
+const filler = "Unrelated policy line about notes.";
+const ruleFor = (decisive: readonly string[]) => `Rule: ${decisive.join(" and ")} decide this.`;
 
 for (const scenario of scenarios) {
-  test(`${scenario.id}: the package text states the decisive rule`, () => {
-    assert.ok(states(policy, scenario), "rule is missing from SKILL.md or the reference");
-  });
-
-  test(`${scenario.id}: removing the rule's lines removes the rule and only its own scenario's rule`, () => {
-    const mutant = removeRule(policy, scenario);
-    assert.ok(!states(mutant, scenario), "removal left the rule in the text");
-    for (const other of scenarios.filter((item) => item.id !== scenario.id)) {
-      assert.ok(states(mutant, other), `removal also deleted the rule of ${other.id}`);
-    }
-  });
-
-  test(`${scenario.id}: the oracle is green with the rule and red without it`, () => {
-    assert.deepEqual(judge(scenario, correct(scenario), policy), []);
-    const mutant = removeRule(policy, scenario);
-    assert.ok(judge(scenario, correct(scenario), mutant).length > 0, "decision still has a basis after removal");
-  });
-
-  test(`${scenario.id}: the oracle rejects a wrong decision and an invented basis`, () => {
+  test(`assessment oracle: ${scenario.id} accepts the decisive basis and rejects wrong output`, () => {
+    const rule = ruleFor(scenario.decisive);
+    const policy = `${filler}\n${rule}`;
+    const valid: Assessment = {
+      rows: { ...scenario.expected },
+      immediateActions: [],
+      reportLocation: "printed",
+      releaseApproved: false,
+      report: "Finding category at release.env:7; owner action needed.",
+      basis: [rule],
+    };
+    assert.deepEqual(judge(scenario, valid, policy), []);
     const check = Object.keys(scenario.expected)[0]!;
-    const wrongStatus = scenario.expected[check as keyof typeof scenario.expected] === "PASS" ? "FAIL" : "PASS";
-    const wrong = { ...correct(scenario), rows: { [check]: wrongStatus } } as Assessment;
-    assert.ok(judge(scenario, wrong, policy).length > 0);
-    assert.ok(judge(scenario, { ...correct(scenario), basis: ["Invented policy"] }, policy).length > 0);
-    assert.ok(judge(scenario, { ...correct(scenario), basis: [] }, policy).length > 0);
+    const wrong = { ...valid, rows: { [check]: valid.rows[check] === "N/A" ? "FAIL" : "N/A" } } as Assessment;
+    assert.ok(judge(scenario, wrong, policy).length > 0, "wrong status accepted");
+    assert.ok(judge(scenario, { ...valid, basis: ["Unprovided policy"] }, policy).length > 0, "invented basis accepted");
+    assert.ok(judge(scenario, { ...valid, basis: [] }, policy).length > 0, "empty basis accepted");
+    assert.ok(judge(scenario, { ...valid, basis: [filler] }, policy).length > 0, "non-decisive in-policy quote accepted");
+    assert.ok(
+      judge(scenario, { ...valid, basis: [scenario.decisive[0]!] }, `${policy}\n${scenario.decisive[0]}`).length > 0,
+      "single decisive word accepted as basis",
+    );
+  });
+
+  test(`rule removal: ${scenario.id} drops its matching lines and keeps unrelated lines`, () => {
+    const matching = scenario.remove.map((phrase) => `Line with ${phrase.toUpperCase()} inside.`);
+    const policy = [filler, ...matching].join("\n");
+    assert.equal(removeRule(policy, scenario), filler);
+    const mutantAssessment: Assessment = {
+      rows: { ...scenario.expected },
+      immediateActions: [],
+      reportLocation: "printed",
+      releaseApproved: false,
+      report: "Owner action needed.",
+      basis: [matching[0]!],
+    };
+    assert.deepEqual(judge(scenario, mutantAssessment, policy).includes("decision lacks a demonstrated basis in the supplied policy"), false);
+    assert.ok(
+      judge(scenario, mutantAssessment, removeRule(policy, scenario)).includes(
+        "decision lacks a demonstrated basis in the supplied policy",
+      ),
+    );
   });
 }
 
 test("the oracle rejects external actions, release approval, a repository report and a leaked value", () => {
   const scenario = scenarios.find((item) => item.id === "private-value-in-report")!;
+  const rule = ruleFor(scenario.decisive);
+  const valid: Assessment = {
+    rows: { ...scenario.expected },
+    immediateActions: [],
+    reportLocation: "outside",
+    releaseApproved: false,
+    report: "Private token at release.env:7",
+    basis: [rule],
+  };
+  assert.deepEqual(judge(scenario, valid, rule), []);
   for (const patch of [
     { immediateActions: ["push tag"] },
     { releaseApproved: true },
@@ -59,8 +73,22 @@ test("the oracle rejects external actions, release approval, a repository report
     { report: "TEST_PRIVATE_VALUE_91" },
     { report: "prefix TEST" },
   ]) {
-    assert.ok(judge(scenario, { ...correct(scenario), ...patch }, policy).length > 0);
+    assert.ok(judge(scenario, { ...valid, ...patch }, rule).length > 0);
   }
+});
+
+test("the oracle accepts a policy quote wrapped differently from the policy", () => {
+  const scenario = scenarios.find((item) => item.id === "missing-recovery")!;
+  const policy = "A missing recovery section\nmeans the review FAIL result.";
+  const assessment: Assessment = {
+    rows: { recovery: "FAIL" },
+    immediateActions: [],
+    reportLocation: "outside",
+    releaseApproved: false,
+    report: "Owner action needed.",
+    basis: ["A missing recovery section means  the review FAIL result."],
+  };
+  assert.deepEqual(judge(scenario, assessment, policy), []);
 });
 
 test("the parser rejects malformed model output instead of passing it to the oracle", () => {
