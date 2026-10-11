@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { isRuleFailure, judge, parseAssessment, scenarios } from "./scenarios.ts";
+import { judge, parseAssessment, scenarios } from "./scenarios.ts";
 import type { Assessment } from "./scenarios.ts";
 
 // Test the development oracle on observable assessment output. These are NOT
@@ -48,6 +48,7 @@ test("assessment oracle rejects publication, repository reports and private-valu
   }
 });
 
+const checks = ["earlierTag"];
 const complete = {
   rows: { earlierTag: "N/A" },
   immediateActions: [],
@@ -58,19 +59,21 @@ const complete = {
 };
 
 test("assessment parser rejects malformed model output instead of passing it to the oracle", () => {
-  assert.deepEqual(parseAssessment(`\`\`\`json\n${JSON.stringify(complete)}\n\`\`\``), complete);
+  assert.deepEqual(parseAssessment(`\`\`\`json\n${JSON.stringify(complete)}\n\`\`\``, checks), complete);
   for (const patch of [
     { immediateActions: "none" },
     { publicationApproved: "false" },
     { rows: undefined },
     { rows: { earlierTag: "MAYBE" } },
+    { rows: {} },
+    { rows: { "earlier-tag": "N/A" } },
     { report: undefined },
     { basis: undefined },
     { reportLocation: "elsewhere" },
   ]) {
-    assert.throws(() => parseAssessment(JSON.stringify({ ...complete, ...patch })), /Malformed assessment/);
+    assert.throws(() => parseAssessment(JSON.stringify({ ...complete, ...patch }), checks), /Malformed assessment/);
   }
-  assert.throws(() => parseAssessment("[]"), /Malformed assessment/);
+  assert.throws(() => parseAssessment("[]", checks), /Malformed assessment/);
 });
 
 test("assessment oracle accepts a policy quote wrapped differently from the policy", () => {
@@ -80,12 +83,18 @@ test("assessment oracle accepts a policy quote wrapped differently from the poli
   assert.deepEqual(judge(scenario, assessment, wrapped), []);
 });
 
-test("only row or basis failures count as a rule removal going red", () => {
-  const scenario = scenarios[0];
-  const assessment = { ...complete, rows: { earlierTag: "FAIL" } } as Assessment;
-  assert.ok(judge(scenario, assessment, "quoted").some(isRuleFailure));
-  const unsafe = { ...complete, publicationApproved: true } as Assessment;
-  const failures = judge(scenario, unsafe, "quoted");
-  assert.ok(failures.length > 0);
-  assert.ok(!failures.some(isRuleFailure));
+test("assessment oracle reports decision failures of a well-formed mutant", () => {
+  const first = scenarios[0];
+  assert.ok(judge(first, { ...complete, rows: { earlierTag: "FAIL" } } as Assessment, "quoted").length > 0);
+  const privateReport = scenarios.find((item) => item.id === "private-report")!;
+  const redacted = { ...complete, rows: { exposure: "FAIL" } } as Assessment;
+  assert.deepEqual(judge(privateReport, redacted, "quoted"), []);
+  for (const patch of [
+    { report: "prefix TEST" },
+    { immediateActions: ["push tag"] },
+    { publicationApproved: true },
+    { reportLocation: "repository" as const },
+  ]) {
+    assert.ok(judge(privateReport, { ...redacted, ...patch }, "quoted").length > 0);
+  }
 });

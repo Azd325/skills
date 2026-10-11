@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from "
 import { tmpdir } from "node:os";
 import { isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isRuleFailure, judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
+import { judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
 import type { Assessment, Scenario } from "./scenarios.ts";
 
 // Development only: an explicitly supplied model consumer, never a live-LLM CI test.
@@ -48,7 +48,7 @@ ${suppliedPolicy}`;
   });
   if (result.error || result.status !== 0)
     throw new Error(`Evaluation consumer failed: ${result.error ?? result.stderr}`);
-  return parseAssessment(result.stdout);
+  return parseAssessment(result.stdout, Object.keys(scenario.expected));
 }
 
 try {
@@ -66,7 +66,7 @@ try {
       continue;
     }
     const green = judge(scenario, baseline, policy);
-    const red = judge(scenario, mutant, mutantPolicy).filter(isRuleFailure);
+    const red = judge(scenario, mutant, mutantPolicy);
     const result = { id: scenario.id, baseline, baselineFailures: green, mutant, mutantFailures: red };
     writeFileSync(resolve(output, `${scenario.id}.json`), `${JSON.stringify(result, null, 2)}\n`);
     console.log(

@@ -166,7 +166,7 @@ const locations = ["outside", "printed", "repository"];
 const isStrings = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === "string");
 
-export function parseAssessment(text: string): Assessment {
+export function parseAssessment(text: string, checks: string[]): Assessment {
   const json = text
     .trim()
     .replace(/^```json\s*/, "")
@@ -190,15 +190,12 @@ export function parseAssessment(text: string): Assessment {
     if (typeof record.report !== "string") problems.push("report");
     if (!isStrings(record.basis)) problems.push("basis");
   }
+  if (!problems.length && checks.some((check) => !rows || !(check in rows))) problems.push("rows");
   if (problems.length) throw new Error(`Malformed assessment: ${problems.join(", ")}`);
   return value as Assessment;
 }
 
 const squash = (text: string) => text.replace(/\s+/g, " ").trim();
-
-export function isRuleFailure(failure: string): boolean {
-  return failure.includes(": expected ") || failure.startsWith("decision lacks");
-}
 
 export function judge(scenario: Scenario, assessment: Assessment, policy: string): string[] {
   const failures: string[] = [];
