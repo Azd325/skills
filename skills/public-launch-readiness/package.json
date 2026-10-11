@@ -1,0 +1,20 @@
+{
+  "name": "public-launch-readiness",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Evidence-based assessment of a repository's first public launch.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
