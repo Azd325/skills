@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from "
 import { tmpdir } from "node:os";
 import { isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { judge, removeRule, scenarios } from "./scenarios.ts";
+import { isRuleFailure, judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
 import type { Assessment, Scenario } from "./scenarios.ts";
 
 // Development only: an explicitly supplied model consumer, never a live-LLM CI test.
@@ -48,21 +48,25 @@ ${suppliedPolicy}`;
   });
   if (result.error || result.status !== 0)
     throw new Error(`Evaluation consumer failed: ${result.error ?? result.stderr}`);
-  const json = result.stdout
-    .trim()
-    .replace(/^```json\s*/, "")
-    .replace(/\s*```$/, "");
-  return JSON.parse(json) as Assessment;
+  return parseAssessment(result.stdout);
 }
 
 try {
   let failed = false;
   for (const scenario of scenarios) {
-    const baseline = assess(scenario, policy);
-    const green = judge(scenario, baseline, policy);
+    let baseline: Assessment;
+    let mutant: Assessment;
     const mutantPolicy = removeRule(policy, scenario);
-    const mutant = assess(scenario, mutantPolicy);
-    const red = judge(scenario, mutant, mutantPolicy);
+    try {
+      baseline = assess(scenario, policy);
+      mutant = assess(scenario, mutantPolicy);
+    } catch (error) {
+      console.log(`${scenario.id}: ERROR ${error instanceof Error ? error.message : error}`);
+      failed = true;
+      continue;
+    }
+    const green = judge(scenario, baseline, policy);
+    const red = judge(scenario, mutant, mutantPolicy).filter(isRuleFailure);
     const result = { id: scenario.id, baseline, baselineFailures: green, mutant, mutantFailures: red };
     writeFileSync(resolve(output, `${scenario.id}.json`), `${JSON.stringify(result, null, 2)}\n`);
     console.log(

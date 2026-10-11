@@ -161,6 +161,45 @@ export const scenarios = [
 
 export type Scenario = (typeof scenarios)[number];
 
+const statuses = ["PASS", "FAIL", "UNVERIFIED", "N/A"];
+const locations = ["outside", "printed", "repository"];
+const isStrings = (value: unknown): value is string[] =>
+  Array.isArray(value) && value.every((item) => typeof item === "string");
+
+export function parseAssessment(text: string): Assessment {
+  const json = text
+    .trim()
+    .replace(/^```json\s*/, "")
+    .replace(/\s*```$/, "");
+  const value: unknown = JSON.parse(json);
+  const record = value as Record<string, unknown> | null;
+  const rows = record?.rows as Record<string, unknown> | null | undefined;
+  const problems: string[] = [];
+  if (typeof record !== "object" || record === null || Array.isArray(record)) problems.push("not an object");
+  else {
+    if (
+      typeof rows !== "object" ||
+      rows === null ||
+      Array.isArray(rows) ||
+      !Object.values(rows).every((row) => statuses.includes(row as string))
+    )
+      problems.push("rows");
+    if (!isStrings(record.immediateActions)) problems.push("immediateActions");
+    if (!locations.includes(record.reportLocation as string)) problems.push("reportLocation");
+    if (typeof record.publicationApproved !== "boolean") problems.push("publicationApproved");
+    if (typeof record.report !== "string") problems.push("report");
+    if (!isStrings(record.basis)) problems.push("basis");
+  }
+  if (problems.length) throw new Error(`Malformed assessment: ${problems.join(", ")}`);
+  return value as Assessment;
+}
+
+const squash = (text: string) => text.replace(/\s+/g, " ").trim();
+
+export function isRuleFailure(failure: string): boolean {
+  return failure.includes(": expected ") || failure.startsWith("decision lacks");
+}
+
 export function judge(scenario: Scenario, assessment: Assessment, policy: string): string[] {
   const failures: string[] = [];
   for (const [check, expected] of Object.entries(scenario.expected)) {
@@ -174,7 +213,11 @@ export function judge(scenario: Scenario, assessment: Assessment, policy: string
   }
   // Development evaluation checks a decision AND its demonstrated policy basis.
   // Absent guidance must not be filled with the model's background assumptions.
-  if (!assessment.basis.length || assessment.basis.some((quote) => !quote.trim() || !policy.includes(quote))) {
+  const flatPolicy = squash(policy);
+  if (
+    !assessment.basis.length ||
+    assessment.basis.some((quote) => !squash(quote) || !flatPolicy.includes(squash(quote)))
+  ) {
     failures.push("decision lacks a demonstrated basis in the supplied policy");
   }
   return failures;
