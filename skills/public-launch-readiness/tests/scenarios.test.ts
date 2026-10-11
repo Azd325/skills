@@ -5,7 +5,7 @@ import type { Assessment } from "./scenarios.ts";
 
 // Test the development oracle on observable assessment output. These are NOT
 // claimed as evidence of model interpretation; pnpm evaluate supplies that.
-const policy = "Explicit policy supplied to the assessment consumer.";
+const policy = "Explicit policy supplied to the assessment consumer. History is UNVERIFIED. Local install of fixture provenance. No earlier tag is N/A.";
 for (const scenario of scenarios) {
   test(`assessment oracle: ${scenario.id} rejects a wrong evidence decision`, () => {
     const valid: Assessment = {
@@ -97,4 +97,12 @@ test("assessment oracle reports decision failures of a well-formed mutant", () =
   ]) {
     assert.ok(judge(privateReport, { ...redacted, ...patch }, "quoted").length > 0);
   }
+});
+
+test("assessment oracle requires the basis to state the decisive unread-history rule", () => {
+  const unread = scenarios.find((item) => item.id === "unread-history")!;
+  const policy = "Unread history stays UNVERIFIED even when the current tree has no matches.\nMissing evidence is not an N/A reason.";
+  const base = { ...complete, rows: { history: "UNVERIFIED" } } as Assessment;
+  assert.deepEqual(judge(unread, { ...base, basis: ["Unread history stays  UNVERIFIED"] }, policy), []);
+  assert.ok(judge(unread, { ...base, basis: ["Missing evidence is not an N/A reason."] }, policy).length > 0);
 });

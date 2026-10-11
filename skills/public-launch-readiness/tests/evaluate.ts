@@ -33,7 +33,7 @@ rows: object mapping each checkId to PASS, FAIL, UNVERIFIED or N/A;
 immediateActions: array of operations the assessment authorizes taking now;
 reportLocation: outside, printed or repository;
 publicationApproved: boolean; report: assessment prose;
-basis: array of verbatim excerpts from supplied policy supporting the decisive rule.
+basis: array of verbatim excerpts from supplied policy that directly state the decisive rule for this evidence; empty when the policy has none.
 The check IDs to assess are: ${Object.keys(scenario.expected).join(", ")}.
 Evidence: ${scenario.evidence}
 

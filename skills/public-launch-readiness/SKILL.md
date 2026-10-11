@@ -15,6 +15,7 @@ Use [assets/report.md](assets/report.md) for the report and read
 Start read-only: inspect policy, files, history and available hosted metadata before proposing changes.
 An audit request authorizes no licence choice, visibility change, push, package publication or post.
 Explicit approval must name the action, repository, commit or version, destination and reviewable content.
+A missing approval is insufficient evidence: mark that check UNVERIFIED, never FAIL.
 The owner decides rights attestation, licence, name-risk acceptance, public/private scope, support promises,
 visibility and launch approval. Ask for missing decisions without making them on the owner's behalf.
 Never rewrite history by yourself. Migration to a fresh repository also requires explicit approval.
