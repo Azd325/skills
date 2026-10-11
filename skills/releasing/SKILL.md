@@ -24,6 +24,7 @@ A request for a draft, a review or a check is not approval for any external acti
 Never push a tag, create a release, publish a package or post a notice without explicit approval.
 Approval names the action, the repository, the commit or version, and the destination.
 A check request is not approval for a tag, push, release, publication or post.
+When no explicit approval exists for an external action, the approval row is UNVERIFIED, never PASS.
 Refuse a request to replace, move or delete-and-recreate a published tag or version.
 Offer the recovery options in RELEASING.md instead; a human chooses one.
 Edit RELEASING.md only when the request grants that editing scope. A review changes nothing.
