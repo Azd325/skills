@@ -24,9 +24,15 @@ for (const scenario of scenarios) {
     const check = Object.keys(scenario.expected)[0]!;
     const wrong = { ...valid, rows: { [check]: valid.rows[check] === "N/A" ? "FAIL" : "N/A" } } as Assessment;
     assert.ok(judge(scenario, wrong, policy).length > 0, "wrong status accepted");
-    assert.ok(judge(scenario, { ...valid, basis: ["Unprovided policy"] }, policy).length > 0, "invented basis accepted");
+    assert.ok(
+      judge(scenario, { ...valid, basis: ["Unprovided policy"] }, policy).length > 0,
+      "invented basis accepted",
+    );
     assert.ok(judge(scenario, { ...valid, basis: [] }, policy).length > 0, "empty basis accepted");
-    assert.ok(judge(scenario, { ...valid, basis: [filler] }, policy).length > 0, "non-decisive in-policy quote accepted");
+    assert.ok(
+      judge(scenario, { ...valid, basis: [filler] }, policy).length > 0,
+      "non-decisive in-policy quote accepted",
+    );
     assert.ok(
       judge(scenario, { ...valid, basis: [scenario.decisive[0]!] }, `${policy}\n${scenario.decisive[0]}`).length > 0,
       "single decisive word accepted as basis",
@@ -45,7 +51,10 @@ for (const scenario of scenarios) {
       report: "Owner action needed.",
       basis: [matching[0]!],
     };
-    assert.deepEqual(judge(scenario, mutantAssessment, policy).includes("decision lacks a demonstrated basis in the supplied policy"), false);
+    assert.deepEqual(
+      judge(scenario, mutantAssessment, policy).includes("decision lacks a demonstrated basis in the supplied policy"),
+      false,
+    );
     assert.ok(
       judge(scenario, mutantAssessment, removeRule(policy, scenario)).includes(
         "decision lacks a demonstrated basis in the supplied policy",
