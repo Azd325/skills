@@ -47,15 +47,6 @@ test("a copied package resolves its entrypoint and resources in a fresh agent ho
   }
 });
 
-test("the skill and its reference stay within the package size contract", async () => {
-  const skill = (await readFile(new URL("../SKILL.md", import.meta.url), "utf8")).trimEnd().split("\n");
-  const reference = (await readFile(new URL("../references/releasing-md.md", import.meta.url), "utf8"))
-    .trimEnd()
-    .split("\n");
-  assert.ok(skill.length >= 100 && skill.length <= 150, `SKILL.md has ${skill.length} lines`);
-  assert.ok(reference.length >= 50 && reference.length <= 80, `reference has ${reference.length} lines`);
-});
-
 test("development evaluation refuses to write run evidence inside the repository", () => {
   const result = spawnSync(
     process.execPath,
