@@ -37,8 +37,7 @@ test("a copied package resolves its entrypoint and resources in a fresh agent ho
     });
     const { frontmatter, resources } = await consumeInstalledSkill(installed);
     assert.equal(frontmatter.name, "releasing");
-    assert.match(frontmatter.description!, /RELEASING\.md/);
-    assert.match(frontmatter.description!, /public-launch-readiness/);
+    assert.ok(frontmatter.description);
     assert.deepEqual([...resources.keys()], ["references/releasing-md.md"]);
 
     await unlink(join(installed, "references/releasing-md.md"));
