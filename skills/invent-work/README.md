@@ -28,4 +28,18 @@ The skill names each source that it could not reach.
 
 ## Tests
 
-The package has no tests, because it holds prompt text only and no rule that code enforces.
+Use Node 26 or later. At the repository root, run `pnpm install` and `pnpm run check`.
+CI checks installation in a fresh home and the scenario oracle, parser and rule-removal helper.
+These deterministic tests do not prove model interpretation and call no live model.
+
+For development-only evaluation with synthetic evidence:
+
+```sh
+mkdir -p /tmp/invent-work-evidence
+pnpm --filter invent-work evaluate /tmp/invent-work-evidence MODEL_RUNNER [ARGS...]
+```
+
+The runner reads a prompt on stdin and emits assessment JSON on stdout, with tools, hooks, skills
+and repository discovery disabled. Each scenario runs with the original policy and with its rule
+removed. Passing requires the restored assessment to pass and the removed-rule assessment to go red.
+Keep evaluation output outside the repository. This checks interpretation; it enforces nothing.
