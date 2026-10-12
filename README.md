@@ -1,6 +1,6 @@
 # skills
 
-[![CI](https://github.com/Azd325/skills/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Azd325/skills/actions/workflows/ci.yml) [![Licence: MIT](https://img.shields.io/badge/licence-MIT-green)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/Azd325/skills/ci.yml?branch=main)](https://github.com/Azd325/skills/actions/workflows/ci.yml) [![Licence: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 Packages for coding agents by Tim Kleinschmidt (Azd325).
 
