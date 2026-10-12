@@ -22,7 +22,7 @@ When the evidence is too thin to rank, it says which source to collect next and 
 ## Rank against the loudest signal
 
 Each candidate has a position on two axes: how much argument the signal already supplies, and whether the signal leads or lags.
-Leading signals with the argument already supplied rank first.
+Leading signals with a partial argument rank first; the skill states the full order.
 A candidate that rests on one recent incident or one leader's remark ranks lower until a second source confirms it.
 Corroboration counts more than volume.
 The report names the loudest signal that did not rank first, and says why.
