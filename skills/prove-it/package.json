@@ -1,0 +1,19 @@
+{
+  "name": "prove-it",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Produce a one-page proof report with artifacts before a change is reviewed.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
