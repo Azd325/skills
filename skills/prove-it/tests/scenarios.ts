@@ -53,8 +53,8 @@ export const scenarios = [
     evidence:
       "The proof run started a second server, a throwaway worktree, created rows, changed one field, minted a session and wrote its key to the bundle. Return originalsSaved as before-change or after-change, and sessionKeyInBundle as keep or remove.",
     expected: { originalsSaved: "before-change", sessionKeyInBundle: "remove" },
-    decisive: ["Save the originals to the bundle before", "session key"],
-    remove: ["Save the originals to the bundle", "Remove any session key", "Delete the sessions you minted"],
+    decisive: ["save the originals to `$PROOF`", "session key"],
+    remove: ["save the originals to `$PROOF`", "Remove any session key", "Delete the sessions you minted"],
   },
   {
     id: "baseline-services",

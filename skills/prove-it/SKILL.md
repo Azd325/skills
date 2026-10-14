@@ -87,6 +87,7 @@ Only a failed assertion is a red.
 
 ## 4. Capture
 
+- Before you create a row, change a field or mint a session, save the originals to `$PROOF`.
 - Browser driver: use `chrome-devtools-axi` for screenshots, before/after pairs, console output, network requests and performance traces.
   Read its current help for the commands.
 - Video: `chrome-devtools-axi` does not record video.
@@ -138,7 +139,7 @@ Remove what the proof run created, after the last capture (including rows re-run
 
 1. Stop the extra server.
 2. Remove the throwaway worktree.
-3. Delete the rows you created and restore the fields you changed. Save the originals to the bundle before you change them.
+3. Delete the rows you created and restore the fields you changed from the originals saved in step 4.
 4. Delete the sessions you minted.
 5. Drop the extra test database.
 6. Remove any session key from the bundle.
