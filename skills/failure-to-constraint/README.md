@@ -34,8 +34,8 @@ Other failures qualify on a second occurrence that the repository history shows,
 
 Use Node 26 or later. At the repository root, run `pnpm install` and `pnpm run check`.
 CI checks installation in a fresh home, the frontmatter, the description limits, code-fence balance, and the scenario oracle, parser and rule-removal helper.
-Each scenario test also reads the shipped `SKILL.md`: it finds the rule lines of the scenario and goes red when they are removed.
-These deterministic tests do not prove model interpretation and call no live model.
+These deterministic tests use synthetic policy, do not prove model interpretation and call no live model.
+`pnpm evaluate` checks interpretation: it runs each scenario with the rule and with the rule removed.
 
 For development-only evaluation with synthetic evidence:
 

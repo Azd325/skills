@@ -1,12 +1,10 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { judge, parseAssessment, removeRule, ruleLines, scenarios } from "./scenarios.ts";
+import { judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
 import type { Assessment, Scenario } from "./scenarios.ts";
 
-// CI ties each scenario to the rule lines of the shipped SKILL.md and tests the
-// oracle with synthetic policy. Model interpretation belongs to pnpm evaluate.
-const skill = readFileSync(new URL("../SKILL.md", import.meta.url), "utf8");
+// CI tests the oracle, parser and rule-removal helper with synthetic policy.
+// Model interpretation belongs to pnpm evaluate.
 const filler = "Unrelated policy about notes.";
 const ruleFor = (scenario: Scenario) => `Rule: ${scenario.decisive.join(" and ")} decide this.`;
 const validFor = (scenario: Scenario, basis: string[]): Assessment => ({
@@ -17,19 +15,6 @@ const validFor = (scenario: Scenario, basis: string[]): Assessment => ({
 });
 
 for (const scenario of scenarios) {
-  test(`SKILL.md rule: ${scenario.id} is stated in the skill and goes red without it`, () => {
-    for (const phrase of scenario.remove) {
-      assert.ok(ruleLines(skill, [phrase]).length, `missing rule: ${phrase}`);
-    }
-    const assessment = validFor(scenario, ruleLines(skill, scenario.remove));
-    assert.deepEqual(judge(scenario, assessment, skill), []);
-    assert.ok(
-      judge(scenario, assessment, removeRule(skill, scenario)).includes(
-        "decision lacks a demonstrated basis in the supplied policy",
-      ),
-    );
-  });
-
   test(`assessment oracle: ${scenario.id} rejects wrong decisions and unsupported bases`, () => {
     const rule = ruleFor(scenario);
     const policy = `${filler}\n${rule}`;

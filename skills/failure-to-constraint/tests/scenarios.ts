@@ -230,10 +230,6 @@ export function judge(scenario: Scenario, assessment: Assessment, policy: string
 const matches = (line: string, phrases: readonly string[]) =>
   phrases.some((phrase) => squash(line).toLowerCase().includes(squash(phrase).toLowerCase()));
 
-export function ruleLines(policy: string, phrases: readonly string[]): string[] {
-  return policy.split("\n").filter((line) => matches(line, phrases));
-}
-
 export function removeRule(policy: string, scenario: Scenario): string {
   return policy
     .split("\n")

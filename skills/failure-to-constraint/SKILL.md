@@ -180,7 +180,7 @@ Fix the condition, and add the lint step `ref-conditions-use-full-refs` to the p
 
 ## Proof
 
-- Rejects the failure: `! (grep -nE "github\.ref *[!=]= *'" .github/workflows/*.yml | grep -v "'refs/")` → 1 on the old file
+- Rejects the failure: `! (grep -nE "github\.ref *[!=]= *'" .github/workflows/*.yml .github/workflows/*.yaml | grep -v "'refs/")` → 1 on the old file
 - Accepts valid cases: the same command → 0 after the fix
 - Red when disabled: put back the old condition → 1, then restored → 0
 - Runs on the real path: the `lint` job log of the pull request shows the step; the next push to main shows `schema-guard` as succeeded, not skipped
