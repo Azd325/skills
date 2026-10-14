@@ -41,16 +41,21 @@ Write each behaviour the change claims as one line: "X now does Y for user Z".
 Add the implicit claim of every change: "nothing else changed".
 Each claim becomes one row of the matrix.
 
+Before you pick a baseline, run `git cherry -v origin/main <branch>`.
+A line that starts with `-` means main already holds the patch.
+Say so at the top of the report, and prove the change on main: "before" is the parent of the merged commit.
+
 ## 3. Pick the evidence per claim
 
-| Change shape                        | Evidence                                                                                                                           |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| UI / user flow                      | a video with one chapter per step, plus a before/after screenshot pair at the same URL, user and viewport                          |
-| Bug fix                             | reproduce on main first (screenshot, failing request, or a test that is red on main), then the same check green on the branch      |
-| Refactor, "no behaviour change"     | a render or response diff of the affected output, main against branch; list every delta and explain it                             |
-| Performance                         | same data, same command, at least 5 runs on each side, median and spread in a table; profile or trace output for the claimed cause |
-| New guard / validation / permission | the test, plus a mutation proof: remove the guard, show the red output, restore it                                                 |
-| Background job / email / signal     | run it locally and capture the side effect: the database row, the rendered email, the log line                                     |
+| Change shape                                 | Evidence                                                                                                                                           |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UI / user flow                               | a video with one chapter per step, plus a before/after screenshot pair at the same URL, user and viewport                                          |
+| Bug fix                                      | reproduce on main first (screenshot, failing request, or a test that is red on main), then the same check green on the branch                      |
+| Transform (sanitizer, serializer, formatter) | for "nothing else changed": 10-15 typical inputs, parsed by a real browser in the original and the transformed form, DOM and visible text compared |
+| Refactor, "no behaviour change"              | a render or response diff of the affected output, main against branch; list every delta and explain it                                             |
+| Performance                                  | same data, same command, at least 5 runs on each side, median and spread in a table; profile or trace output for the claimed cause                 |
+| New guard / validation / permission          | the test, plus a mutation proof: remove the guard, show the red output, restore it                                                                 |
+| Background job / email / signal              | run it locally and capture the side effect: the database row, the rendered email, the log line                                                     |
 
 Run against the real local stack, with no mocks on the path you claim.
 Use demo or seed data: never capture production data.
@@ -62,11 +67,27 @@ When the login form gets in the way, create a local session by the project's own
   This is the cheapest option.
 - Browser behaviour: create a separate worktree for main and run it on another port.
   Never check out main in the working tree you are proving.
+- Reuse the running stack's backing services for the second side, and never print its environment.
 - If you cannot get a baseline, say "no baseline" in the row.
   Do not substitute a description of what main "probably" did.
 
+**A bug that does not reproduce on "before" is a finding.**
+Report it under "Not proven".
+Never tune the input until it breaks without saying so on the page.
+
+**Transforms.**
+For "nothing else changed" on a sanitizer, serializer or formatter, build 10-15 typical inputs.
+Let a real browser parse the original and the transformed version, and compare the DOM and the visible text.
+The browser is the oracle, not your reading of the output.
+
+**Mutation red for tests on old code.**
+Run the new tests against the "before" side with a separate test database.
+An error, for example a schema mismatch, is not a red.
+Only a failed assertion is a red.
+
 ## 4. Capture
 
+- Before you create a row, change a field or mint a session, save the originals to `$PROOF`.
 - Browser driver: use `chrome-devtools-axi` for screenshots, before/after pairs, console output, network requests and performance traces.
   Read its current help for the commands.
 - Video: `chrome-devtools-axi` does not record video.
@@ -74,6 +95,7 @@ When the login form gets in the way, create a local session by the project's own
   When no video recorder is available, take a numbered screenshot sequence, one per step, and name each step in the report.
   Keep each video under 60 seconds. Make one video per claim, not one for the whole session.
 - Screenshots: `before-<claim>.png` and `after-<claim>.png` with identical viewport and data.
+  Dismiss cookie and consent overlays before each screenshot.
 - Command evidence: save the exact command and its full output to `$PROOF/<claim>.txt`.
   Do not trim the failing lines.
 - Test runs: the test command, the pass count, and the mutation red/green pair when the row needs one.
@@ -81,7 +103,7 @@ When the login form gets in the way, create a local session by the project's own
 ## 5. Write the report
 
 Write `$PROOF/index.html`: plain HTML, no external assets, files referenced relatively, `<video controls>` for videos.
-Then open it in the default browser.
+Then open it in the default browser, or in Lavish when it is installed (see "Lavish mode").
 Sections, in this order:
 
 1. **Header**: branch, commit, date, one sentence on what the change does.
@@ -97,7 +119,34 @@ Sections, in this order:
 5. **Gates**: the project's check and test commands, with pass/fail taken from the output.
    Never use your memory of an earlier run.
 
-## 6. Report back
+### Lavish mode (optional)
+
+Plain `index.html` is the default and needs no other tool.
+When `command -v lavish-axi` finds the binary, review the same file in Lavish instead of using `open`.
+Never run it through `npx`: that can restart a shared server with another version.
+Read `lavish-axi --help` for the current commands.
+
+1. Run `lavish-axi "$PROOF/index.html"`. Do not write a second copy of the page.
+2. Wait for the reviewer with `lavish-axi poll "$PROOF/index.html"`. Keep the poll in the foreground, and re-run it when it times out.
+3. For each comment, answer it with evidence. When a row is disputed, re-run that row, update `index.html`, and pass a short `--agent-reply` to the next poll.
+4. When the reviewer sends "Send & End", or no more feedback is due, run `lavish-axi end "$PROOF/index.html"`. Never reopen an ended session unless the user asks.
+
+Without Lavish nothing changes: the file stays valid plain HTML.
+
+## 6. Clean up
+
+Remove what the proof run created, after the last capture (including rows re-run for review comments) and before you report.
+
+1. Stop the extra server.
+2. Remove the throwaway worktree.
+3. Delete the rows you created and restore the fields you changed from the originals saved in step 4.
+4. Delete the sessions you minted.
+5. Drop the extra test database.
+6. Remove any session key from the bundle.
+
+List each item you could not remove under "Not proven".
+
+## 7. Report back
 
 In chat: the path to `index.html`, the matrix in 3–5 lines, and the "Not proven" list in full.
 When a row is ✗, say so first.
