@@ -1,0 +1,20 @@
+{
+  "name": "failure-to-constraint",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Turn one confirmed failure into the smallest control that rejects it, with proof that the control works and runs.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
