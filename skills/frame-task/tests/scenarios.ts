@@ -88,7 +88,7 @@ export const scenarios = [
     evidence: "The user asks which of five candidate tasks to build next. Return skill as frame-task or invent-work.",
     expected: { skill: "invent-work" },
     decisive: ["candidate tasks", "invent-work"],
-    remove: ["For a choice between several candidate tasks", "belongs to invent-work", "It is not for choosing"],
+    remove: ["For a choice between several candidate tasks", "belongs to invent-work"],
   },
   {
     id: "report-contract",
