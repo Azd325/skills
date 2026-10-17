@@ -32,11 +32,13 @@ Skip a source you cannot reach, and name it in the report. Do not invent evidenc
 | System   | Postmortems, repeated incidents | Error tracker, incident tickets, `fix:`/revert commits    | pre-argued    | lagging                                              |
 | System   | Cost                            | Cloud bill, vendor contracts, CI minutes                  | pre-argued    | lagging                                              |
 | System   | Your own toil                   | Repeated manual steps, agent memory or friction logs      | partial       | lagging                                              |
+| System   | Stalled projects                | Open tickets or branches with no activity for weeks       | partial       | lagging                                              |
 | Users    | Continuous discovery            | Recent user conversations, support requests               | must be built | leading                                              |
 | Users    | Overloaded use-cases            | Features used for a job they were not built for           | partial       | leading                                              |
 | Users    | Partner-to-prototype            | A team willing to build a prototype with you              | partial       | leading                                              |
 | Org      | OKRs                            | Team and company goals                                    | pre-argued    | lagging                                              |
 | Org      | Leader repeats a topic          | Same topic raised twice in one week                       | must be built | either                                               |
+| Org      | Work only you would do          | Unassigned tickets in areas where your commits dominate   | must be built | either                                               |
 | Org      | Migration debris                | Teams still on the old system after a migration           | partial       | lagging for the last migration, leading for the next |
 | Industry | Descriptive → prescriptive      | Describe a system today, compare with current practice    | must be built | leading                                              |
 | Industry | Lag arbitrage                   | Bundling/unbundling swings already argued in the industry | must be built | either                                               |
@@ -46,7 +48,9 @@ A leader's repeated topic is weak because leaders are far from users. These note
 the two measures below do. Your toil is not your users' toil. In discovery, record the problem, not the
 requested solution; a pain with no workaround may not be acute. Partnering is exploration, not a promise.
 Revisit cost's buy-or-build choice. Incidents favor loud, recent damage; OKRs supply an existing argument.
-Migration debris exposes platform gaps. Describing a system surfaces stale decisions; industry evidence
+Stalled projects often need only a smaller scope to finish, and finished work creates value that
+started work does not. Work only you would do sits where your strengths meet work nobody else will pick up;
+check that the tracker shows no other owner. Migration debris exposes platform gaps. Describing a system surfaces stale decisions; industry evidence
 can be borrowed, but waiting too long makes you a straggler.
 
 ## 2. Rank
@@ -66,8 +70,20 @@ Down-rank a candidate supported only by one recent incident, one leader's remark
 request below every ranked candidate, to the Watching list, until corroborated. A second source means a
 signal from a different group: System, Users, Org or Industry. A watched item moves into the ranking
 when a second group raises the same problem.
+Check **room** for each candidate: is someone already working on it? The tracker shows this as an
+assignee, branch or pull request with recent activity. One active assignee, branch or pull request means
+no open room. A stale assignee, branch or pull request leaves the room open. Crowding by leadership and many others is the strongest case of the same
+thing, not a separate threshold. Room never changes a candidate's measures. A candidate with no open
+room ranks below every candidate with open room, and the fixed order applies within each of the two groups.
+An existential candidate is exempt: the organisation is at risk, so room does not lower it and the fixed
+order applies to it as usual. It needs tracker or incident evidence of that risk, and the report cites it.
+
+Two traps make a weak candidate look strong. Snacking is easy work with low impact. Preening is low-impact
+work done to be seen. Ease and visibility are not evidence of impact: do not count either as an argument.
+A candidate whose only support is one of them goes to the Watching list.
+
 Merge signals supporting the same work into one candidate. Corroboration can move it up; explain any
-placement that differs from the fixed order. Corroboration counts more than volume.
+placement that differs from the fixed order within its room group. Corroboration counts more than volume.
 A merged candidate is a hypothesis. When you merge signals into one underlying need, name the test that
 would split them again: the finding that would show they need different work.
 
@@ -76,10 +92,11 @@ would split them again: the finding that would show they need different work.
 Before reporting, self-check:
 
 1. Each ranked candidate has evidence the reader can open; otherwise remove it from the list.
-2. The order follows the four-step rule, or states why corroboration changes a candidate's placement.
+2. The order follows the four-step rule within each room group, or states why corroboration changes a candidate's placement.
 3. Every source not reached is named.
 4. Every merged candidate names its split test.
-5. Every single-request item is listed under Watching or counted in its overflow line, never ranked or silently dropped.
+5. Every candidate without open room that ranks above open room is existential and cites the evidence.
+6. Every single-request item is listed under Watching or counted in its overflow line, never ranked or silently dropped.
 
 If evidence is too thin to rank, say which source to collect next instead of guessing.
 Use this template, with at most five candidates (omit the comparison for the last candidate):
@@ -96,7 +113,7 @@ Use this template, with at most five candidates (omit the comparison for the las
 
 ## Loudest signal not ranked first
 
-<signal>: <why it is not first>
+<signal>: <why it is not first; say if it is snacking or preening>
 
 ## Watching
 
