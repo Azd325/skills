@@ -25,7 +25,7 @@ Without it, copy `SKILL.md` into a folder named `write-strategy` in the skills d
 ## Use
 
 Inside a repository, ask the agent to "write our engineering strategy" or "what do our design docs keep deciding".
-The skill looks for decision records, RFCs, design docs and substantial PR descriptions, in that order.
+The skill takes the five most recent documents across decision records, RFCs, design docs and substantial PR descriptions.
 Each policy cites its sources by path or link. With fewer than three documents, the skill says so and names what to collect; with fewer than two, nothing recurs and it writes no policies.
 
 ## Tests
