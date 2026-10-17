@@ -71,8 +71,8 @@ request below every ranked candidate, to the Watching list, until corroborated. 
 signal from a different group: System, Users, Org or Industry. A watched item moves into the ranking
 when a second group raises the same problem.
 Check **room** for each candidate: is someone already working on it? The tracker shows this as an
-assignee with recent activity, or an open branch or pull request. One active assignee or one open pull
-request means no open room. Crowding by leadership and many others is the strongest case of the same
+assignee, branch or pull request with recent activity. One active assignee, branch or pull request means
+no open room. A stale assignee, branch or pull request leaves the room open. Crowding by leadership and many others is the strongest case of the same
 thing, not a separate threshold. Room never changes a candidate's measures. A candidate with no open
 room ranks below every candidate with open room, and the fixed order applies within each of the two groups.
 An existential candidate is exempt: the organisation is at risk, so room does not lower it and the fixed

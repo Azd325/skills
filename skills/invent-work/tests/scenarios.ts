@@ -91,7 +91,15 @@ export const scenarios = [
       "Candidate A is leading/partial. The tracker shows one engineer assigned with a commit yesterday; no leadership interest. Candidate B is lagging/pre-argued with nobody on it. Neither is existential. Return order as their comma-separated IDs with no spaces.",
     expected: { order: "B,A" },
     decisive: ["One active assignee", "means no open room", "not a separate threshold"],
-    remove: ["One active assignee or one open pull", "not a separate threshold"],
+    remove: ["One active assignee, branch or pull request", "not a separate threshold"],
+  },
+  {
+    id: "room-stale-branch",
+    evidence:
+      "Candidate S is leading/partial. The tracker shows one branch with no commits for six weeks and no assignee. Candidate T is lagging/pre-argued with nobody on it. Neither is existential. Return order as their comma-separated IDs with no spaces.",
+    expected: { order: "S,T" },
+    decisive: ["stale assignee, branch or pull request", "leaves the room open"],
+    remove: ["A stale assignee, branch or pull request leaves the room open"],
   },
   {
     id: "room-existential",
