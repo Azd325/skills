@@ -72,10 +72,10 @@ State each assumption that the framing hides, with the cheapest way to test it.
 Name the smallest version that solves the actual problem, and the signal that would justify more later.
 Then name one next step, sized to your confidence and to the cost of being wrong:
 
-| Next step           | When                                 |
-| ------------------- | ------------------------------------ |
-| Ship now            | Low risk and clear value             |
-| Throwaway prototype | The facts are uncertain              |
+| Next step           | When                                               |
+| ------------------- | -------------------------------------------------- |
+| Ship now            | Low risk and clear value                           |
+| Throwaway prototype | The facts are uncertain                            |
 | Proposal first      | The threshold below is met and the facts are known |
 
 Write a design proposal first only when the work will serve many future projects, changes what users get, or takes more than a month of engineering time.
