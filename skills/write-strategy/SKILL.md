@@ -37,17 +37,17 @@ To choose what to build, use `invent-work`. To frame one task, use `frame-task`.
 
 ## 1. Collect the documents
 
-Take the five most recent design documents or decision records you can reach. Look for, in this order:
+Take the five most recent design documents or decision records you can reach. The list below sets where to search, not a priority: take the five most recent across all sources. Search:
 
 1. Decision records: `docs/adr/`, `docs/decisions/`, `adr/`, files named `NNNN-*.md`.
 2. RFCs and design docs: `rfcs/`, `docs/design/`, `design/`, linked wiki pages.
 3. Substantial PR descriptions: merged PRs whose body argues a choice against an alternative, not a change list.
 
-Order by date: the merge date, or the commit date of the file. Record the path or link and the date of each document.
+Date a document by its merge date, or for a file by its first commit, when it was added. Order by that date. Record the path or link and the date of each document.
 Skip a source you cannot reach and name it in the report. Do not invent a document.
 
-When fewer than three documents are reachable, do not write policies.
-Report the documents you found, and say what to collect next: for example, short decision records for the next three choices, or the reasoning behind the last large merged changes.
+When fewer than three documents are reachable, say so in the report and add a `Collect next:` bullet under "Not reached". Name what to collect: for example, short decision records for the next three choices, or the reasoning behind the last large merged changes. Still write the policies that recur.
+With fewer than two documents nothing recurs: write no policies, and name what to collect.
 
 ## 2. Find the recurring decisions
 
@@ -102,15 +102,6 @@ Read <n> documents, <oldest date> to <newest date>. This is a draft: revise any 
 - <source>: <why>
 ```
 
-With fewer than three documents, use this template instead:
-
-```markdown
-## Strategy draft — <repository>
-
-Too few decisions to write policies: <n> documents reached (<paths or links>).
-Collect next: <what to collect, and where>.
-```
-
 Example — fictional project Moonpickle, fictional paths:
 
 ```markdown
@@ -122,7 +113,7 @@ Read 5 documents, 2026-03-02 to 2026-09-18. This is a draft: revise any reason y
 
 1. **Keep import jobs in the Postgres queue; do not add a message broker.**
    - Reason: two broker trials failed on operational cost for a two-person on-call rotation.
-   - Sources: docs/adr/0007-job-queue.md, docs/adr/0011-revert-broker.md
+   - Sources: docs/adr/0007-job-queue.md, docs/adr/0009-message-broker.md, docs/adr/0011-revert-broker.md
    - Contested: yes, ADR 0011 reverted the broker that ADR 0009 introduced.
 
 ### Left out

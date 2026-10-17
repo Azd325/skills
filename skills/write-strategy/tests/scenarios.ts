@@ -25,16 +25,10 @@ export const scenarios = [
   },
   {
     id: "thin-evidence",
-    evidence: "Two decision records are reachable and no other source is. Return output as policies or collect-next.",
+    evidence: "One decision record is reachable and no other source is. Return output as policies or collect-next.",
     expected: { output: "collect-next" },
-    decisive: ["fewer than three documents", "do not write policies"],
-    remove: [
-      "When fewer than three documents",
-      "Report the documents you found",
-      "With fewer than three documents",
-      "Too few decisions",
-      "Collect next:",
-    ],
+    decisive: ["nothing recurs", "write no policies"],
+    remove: ["With fewer than two documents", "When fewer than three documents", "Collect next:"],
   },
   {
     id: "last-five",

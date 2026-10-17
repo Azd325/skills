@@ -22,7 +22,7 @@ The skill stops when the next policy would be generic. A short draft with real p
 Each policy cites the documents it came from and gives its reason, so that a reader can dispute the reason and revise the policy.
 A decision that appears in one document only is listed as left out, not promoted to a policy.
 Contested decisions come first, because a written policy saves the most argument where people already disagree.
-The skill starts with the documents it can reach and does not wait for more context; with fewer than three documents it writes no policies and says what to collect.
+The skill starts with the documents it can reach and does not wait for more context; with fewer than three documents it says so, names what to collect and still writes the policies that recur; with fewer than two it writes none.
 
 ## Scope
 
