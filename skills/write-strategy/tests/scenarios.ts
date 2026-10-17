@@ -123,7 +123,7 @@ export const scenarios = [
     evidence:
       "Five documents were read. Give the report structure in report (placeholders suffice). Include the strategy heading, guiding policies with reason, sources and contested, the left-out decisions and the sources not reached. Return sections as the number of level-three sections.",
     expected: { sections: "3" },
-    decisive: ["use this template"],
+    decisive: ["### Guiding policies", "### Left out", "### Not reached"],
     remove: [
       "Use this template",
       "## Strategy draft —",
