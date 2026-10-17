@@ -56,10 +56,10 @@ export const scenarios = [
   {
     id: "proposal-threshold",
     evidence:
-      "Case A is a two-week change to one internal script, with clear value and low risk. Case B will serve many future projects. Case C changes what users get. Case D takes three months of engineering time. Return whether a design proposal comes first for each, as yes or no, comma-separated in order A,B,C,D with no spaces.",
-    expected: { proposalFirst: "no,yes,yes,yes" },
-    decisive: ["many future projects", "changes what users get", "more than a month of engineering time"],
-    remove: ["Write a design proposal first only when", "When none of the three holds"],
+      "Case A is a two-week change to one internal script, with clear value and low risk. Case B will serve many future projects and the facts are known. Case C changes what users get and the facts are known. Case D takes three months of engineering time and the facts are known. Case E will serve many future projects but its facts are uncertain. Return whether a design proposal comes first for each, as yes or no, comma-separated in order A,B,C,D,E with no spaces.",
+    expected: { proposalFirst: "no,yes,yes,yes,no" },
+    decisive: ["many future projects", "changes what users get", "more than a month of engineering time", "facts are uncertain"],
+    remove: ["Write a design proposal first only when", "When none of the three holds", "When the threshold is met but the facts are uncertain"],
   },
   {
     id: "step-reason",

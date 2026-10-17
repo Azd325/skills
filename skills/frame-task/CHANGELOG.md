@@ -13,4 +13,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 
-- `SKILL.md`: the proposal-first next step now has a threshold. Write a design proposal first only when the work will serve many future projects, changes what users get, or takes more than a month of engineering time. Otherwise the step is ship now or a throwaway prototype.
+- `SKILL.md`: the proposal-first next step now has a threshold. Write a design proposal first only when the work will serve many future projects, changes what users get, or takes more than a month of engineering time. Otherwise the step is ship now or a throwaway prototype. When the threshold is met but the facts are uncertain, the step is a throwaway prototype first.
