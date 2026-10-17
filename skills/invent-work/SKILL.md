@@ -62,10 +62,14 @@ Rank in this fixed order:
 3. Leading with an argument that must be built.
 4. Lagging without a pre-argued argument.
 
-Down-rank a candidate supported only by one recent incident or one leader's remark until corroborated.
-A second source means a signal from a different group: System, Users, Org or Industry.
+Down-rank a candidate supported only by one recent incident or one leader's remark below every ranked
+candidate, to the Watching list, until corroborated. A second source means a signal from a different
+group: System, Users, Org or Industry. A watched item moves into the ranking when a second group raises
+the same problem.
 Merge signals supporting the same work into one candidate. Corroboration can move it up; explain any
 placement that differs from the fixed order. Corroboration counts more than volume.
+A merged candidate is a hypothesis. When you merge signals into one underlying need, name the test that
+would split them again: the finding that would show they need different work.
 
 ## 3. Report
 
@@ -74,6 +78,8 @@ Before reporting, self-check:
 1. Each ranked candidate has evidence the reader can open; otherwise remove it from the list.
 2. The order follows the four-step rule, or states why corroboration changes a candidate's placement.
 3. Every source not reached is named.
+4. Every merged candidate names its split test.
+5. Every single-request item is under Watching, not ranked and not dropped.
 
 If evidence is too thin to rank, say which source to collect next instead of guessing.
 Use this template, with at most five candidates (omit the comparison for the last candidate):
@@ -85,16 +91,24 @@ Use this template, with at most five candidates (omit the comparison for the las
    - Signals: <signal> (<group>): <evidence: link, ticket, file:line>
    - Measures: <argument> / <timing>
    - Beats 2 because: <one sentence>
+   - Split test (merged candidates only): <the finding that would show the signals need different work>
      ...at most five
 
 ## Loudest signal not ranked first
 
 <signal>: <why it is not first>
 
+## Watching
+
+<request> (<group>): <evidence>; moves up when <second group> raises it
+...at most three, one line each
+
 ## Sources not reached
 
 <source>: <why>
 ```
+
+After the user picks a candidate, frame it with `frame-task`.
 
 Example — fictional project Moonpickle, fictional ticket keys:
 
@@ -108,6 +122,10 @@ Example — fictional project Moonpickle, fictional ticket keys:
 ## Loudest signal not ranked first
 
 The director's import rewrite topic (Org), MOON-19: raised twice this week, but its argument must be built.
+
+## Watching
+
+The platform lead's remark that CI is slow (Org): MOON-21; moves up when Users or System data shows it.
 
 ## Sources not reached
 
