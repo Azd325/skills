@@ -1,0 +1,20 @@
+{
+  "name": "frame-task",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Frame one chosen task as a decision memo, a ranked list of missing context and one step sized to confidence.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
