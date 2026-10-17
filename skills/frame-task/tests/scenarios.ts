@@ -27,7 +27,7 @@ export const scenarios = [
     evidence: "A claim about prior art was not checked in the repository. Return label as grounded or assumed.",
     expected: { label: "assumed" },
     decisive: ["grounded", "assumed"],
-    remove: ["Mark every claim"],
+    remove: ["Mark every claim", "**Grounded vs assumed:**"],
   },
   {
     id: "merged-need",
