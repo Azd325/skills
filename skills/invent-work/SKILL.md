@@ -83,7 +83,7 @@ work done to be seen. Ease and visibility are not evidence of impact: do not cou
 A candidate whose only support is one of them goes to the Watching list.
 
 Merge signals supporting the same work into one candidate. Corroboration can move it up; explain any
-placement that differs from the fixed order. Corroboration counts more than volume.
+placement that differs from the fixed order within its room group. Corroboration counts more than volume.
 A merged candidate is a hypothesis. When you merge signals into one underlying need, name the test that
 would split them again: the finding that would show they need different work.
 
@@ -92,7 +92,7 @@ would split them again: the finding that would show they need different work.
 Before reporting, self-check:
 
 1. Each ranked candidate has evidence the reader can open; otherwise remove it from the list.
-2. The order follows the four-step rule, or states why corroboration changes a candidate's placement.
+2. The order follows the four-step rule within each room group, or states why corroboration changes a candidate's placement.
 3. Every source not reached is named.
 4. Every merged candidate names its split test.
 5. Every candidate without open room that ranks above open room is existential and cites the evidence.
