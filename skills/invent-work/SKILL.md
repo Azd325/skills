@@ -62,10 +62,10 @@ Rank in this fixed order:
 3. Leading with an argument that must be built.
 4. Lagging without a pre-argued argument.
 
-Down-rank a candidate supported only by one recent incident or one leader's remark below every ranked
-candidate, to the Watching list, until corroborated. A second source means a signal from a different
-group: System, Users, Org or Industry. A watched item moves into the ranking when a second group raises
-the same problem.
+Down-rank a candidate supported only by one recent incident, one leader's remark or one vocal team's
+request below every ranked candidate, to the Watching list, until corroborated. A second source means a
+signal from a different group: System, Users, Org or Industry. A watched item moves into the ranking
+when a second group raises the same problem.
 Merge signals supporting the same work into one candidate. Corroboration can move it up; explain any
 placement that differs from the fixed order. Corroboration counts more than volume.
 A merged candidate is a hypothesis. When you merge signals into one underlying need, name the test that
@@ -79,7 +79,7 @@ Before reporting, self-check:
 2. The order follows the four-step rule, or states why corroboration changes a candidate's placement.
 3. Every source not reached is named.
 4. Every merged candidate names its split test.
-5. Every single-request item is under Watching, not ranked and not dropped.
+5. Every single-request item is listed under Watching or counted in its overflow line, never ranked or silently dropped.
 
 If evidence is too thin to rank, say which source to collect next instead of guessing.
 Use this template, with at most five candidates (omit the comparison for the last candidate):
@@ -102,6 +102,7 @@ Use this template, with at most five candidates (omit the comparison for the las
 
 <request> (<group>): <evidence>; moves up when <second group> raises it
 ...at most three, one line each
+and <N> more single requests
 
 ## Sources not reached
 

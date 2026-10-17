@@ -135,7 +135,7 @@ export const scenarios = [
       "One vocal team makes a single request and no other group raises it. Return treatment as watching, ranked or dropped. A second group later raises the same problem: return afterSecondGroup as promote or keep-watching.",
     expected: { treatment: "watching", afterSecondGroup: "promote" },
     decisive: ["watching list", "second group raises the same problem"],
-    remove: ["Down-rank a candidate", "Every single-request item", "## Watching", "<request> (<group>)"],
+    remove: ["Down-rank a candidate", "request below every ranked", "signal from a different group", "when a second group raises", "Every single-request item", "## Watching", "<request> (<group>)"],
     reportFields: ["## Watching"],
   },
   {
