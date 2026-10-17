@@ -7,14 +7,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 
-- Make all eleven signals' argument and timing explicit, use a fixed four-step order, and define corroboration across signal groups.
+- Make all thirteen signals' argument and timing explicit, use a fixed four-step order, and define corroboration across signal groups.
 - Count a leader's repeated topic at twice in one week; keep strong and weak signal notes separate from ranking.
 - Replace report guidance with a fixed template, an evidence/order/source self-check and a short fictional example.
 
 ### Added
 
 - Add two candidate sources: stalled projects that need only a smaller scope to finish, and work only you would do.
-- Add a room check: work someone is already working on, or that leadership and others crowd, ranks below work with open room unless it is existential and cites evidence of the risk.
+- Add a room check: work with active tracker work (an assignee, branch or pull request with recent activity), including work that leadership and others crowd, ranks below work with open room unless it is existential and cites evidence of the risk.
 - Name two traps for the loudest-signal handling: snacking and preening. Neither counts as an argument.
 - Treat a merged need as a hypothesis: the report names the test that would split the merged signals again.
 - Add a `## Watching` list for single requests, which move into the ranking when a second group raises the same problem; down-rank now means the Watching list.
