@@ -122,6 +122,39 @@ export const scenarios = [
     remove: ["If evidence is too thin"],
   },
   {
+    id: "merged-need-hypothesis",
+    evidence:
+      "Users and System signals are merged into one underlying need. Return splitTest as required or optional: must the report name a test that would split the merged signals again?",
+    expected: { splitTest: "required" },
+    decisive: ["merged candidate is a hypothesis", "split them again"],
+    remove: ["A merged candidate is a hypothesis", "Every merged candidate names its split test", "Split test"],
+  },
+  {
+    id: "watching-list",
+    evidence:
+      "One vocal team makes a single request and no other group raises it. Return treatment as watching, ranked or dropped. A second group later raises the same problem: return afterSecondGroup as promote or keep-watching.",
+    expected: { treatment: "watching", afterSecondGroup: "promote" },
+    decisive: ["watching list", "second group raises the same problem"],
+    remove: [
+      "Down-rank a candidate",
+      "request below every ranked",
+      "signal from a different group",
+      "when a second group raises",
+      "Every single-request item",
+      "## Watching",
+      "<request> (<group>)",
+    ],
+    reportFields: ["## Watching"],
+  },
+  {
+    id: "frame-task-handoff",
+    evidence:
+      "The user picked a candidate from the report. Return nextStep as frame-task or none: the skill's hand-off for a chosen candidate.",
+    expected: { nextStep: "frame-task" },
+    decisive: ["frame it with `frame-task`"],
+    remove: ["frame it with `frame-task`"],
+  },
+  {
     id: "report-contract",
     evidence:
       "Six candidates have accessible fictional tickets. Give the report structure in report (placeholders suffice). Return limit as a digit and finalComparison as omit or required. Include fields for candidate evidence, group, measures and reason it beats the next, the loudest signal not first, and unavailable sources.",
@@ -135,6 +168,7 @@ export const scenarios = [
       "Beats 2 because:",
       "## Loudest signal not ranked first",
       "<signal>: <why it is not first>",
+      "## Watching",
       "## Sources not reached",
       "<source>: <why>",
     ],
@@ -144,6 +178,7 @@ export const scenarios = [
       "Measures:",
       "Beats 2 because:",
       "## Loudest signal not ranked first",
+      "## Watching",
       "## Sources not reached",
     ],
   },
