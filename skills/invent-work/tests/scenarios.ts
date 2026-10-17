@@ -17,6 +17,8 @@ export const scenarios = [
     ["Partner-to-prototype", "partial", "leading", "Users"],
     ["OKRs", "pre-argued", "lagging", "Org"],
     ["Leader repeats a topic", "must be built", "either", "Org"],
+    ["Stalled projects", "partial", "lagging", "System"],
+    ["Work only you would do", "must be built", "either", "Org"],
     ["Migration debris", "partial", "lagging for the last migration, leading for the next", "Org"],
     ["Descriptive → prescriptive", "must be built", "leading", "Industry"],
     ["Lag arbitrage", "must be built", "either", "Industry"],
@@ -74,6 +76,44 @@ export const scenarios = [
     expected: { duplicateHandling: "merge", promotion: "allowed-with-reason" },
     decisive: ["merge signals", "corroboration can move", "explain"],
     remove: ["Merge signals", "placement that differs", "order follows the four-step"],
+  },
+  {
+    id: "room-crowded",
+    evidence:
+      "Candidate A is leading/partial, but the tracker shows three teams and a director already on it. Candidate B is lagging/pre-argued with nobody on it. Neither is existential. Return order as their comma-separated IDs with no spaces.",
+    expected: { order: "B,A" },
+    decisive: ["crowded", "ranks below every candidate with open room"],
+    remove: ["Check **room**", "others already crowd", "ranks below every candidate", "Room never changes"],
+  },
+  {
+    id: "room-existential",
+    evidence:
+      "Candidate A is leading/partial and crowded by leadership; an incident ticket shows it puts the organisation at risk. Candidate B is lagging/pre-argued with open room. Return order as their comma-separated IDs with no spaces, and roomPenalty as applies or exempt for A.",
+    expected: { order: "A,B", roomPenalty: "exempt" },
+    decisive: ["existential", "exempt", "organisation is at risk"],
+    remove: ["An existential candidate", "the organisation is at risk", "Every crowded candidate"],
+  },
+  {
+    id: "snacking",
+    evidence:
+      "Candidate S is a one-day fix with low impact; its only support is that it is easy. Return treatment as watching, ranked or dropped, and easeAsArgument as counts or does-not-count.",
+    expected: { treatment: "watching", easeAsArgument: "does-not-count" },
+    decisive: ["snacking", "easy work with low impact", "not evidence of impact"],
+    remove: ["Two traps", "Snacking is easy", "Ease and visibility", "A candidate whose only support"],
+  },
+  {
+    id: "preening",
+    evidence:
+      "Candidate P is low-impact work whose only support is that the director will see it. Return treatment as watching, ranked or dropped, and visibilityAsArgument as counts or does-not-count.",
+    expected: { treatment: "watching", visibilityAsArgument: "does-not-count" },
+    decisive: ["preening", "low-impact work done to be seen", "not evidence of impact"],
+    remove: [
+      "Two traps",
+      "Snacking is easy",
+      "preening is low-impact",
+      "Ease and visibility",
+      "A candidate whose only support",
+    ],
   },
   {
     id: "isolated-loud-signal",
@@ -167,7 +207,7 @@ export const scenarios = [
       "Measures:",
       "Beats 2 because:",
       "## Loudest signal not ranked first",
-      "<signal>: <why it is not first>",
+      "<signal>: <why it is not first",
       "## Watching",
       "## Sources not reached",
       "<source>: <why>",

@@ -13,6 +13,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- Add two candidate sources: stalled projects that need only a smaller scope to finish, and work only you would do.
+- Add a room check: crowded work ranks below work with open room unless it is existential and cites evidence of the risk.
+- Name two traps for the loudest-signal handling: snacking and preening. Neither counts as an argument.
 - Treat a merged need as a hypothesis: the report names the test that would split the merged signals again.
 - Add a `## Watching` list for single requests, which move into the ranking when a second group raises the same problem; down-rank now means the Watching list.
 - Hand a chosen candidate to `frame-task`.
