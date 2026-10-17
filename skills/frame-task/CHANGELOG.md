@@ -10,3 +10,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - `SKILL.md`: the frame-task skill. It frames one chosen task as a decision memo, a ranked list of missing context, the unchecked assumptions and one next step sized to confidence (ship now, throwaway prototype, proposal first). It tests a merged need as a hypothesis, weighs a recurring problem above a first request and hands a choice between candidate tasks to `invent-work`.
 - `VISION.md`: the acceptance policy for the package.
 - Installation, frontmatter and code-fence tests, a scenario oracle with rule-removal tests and an `evaluate` development script.
+
+### Changed
+
+- `SKILL.md`: the proposal-first next step now has a threshold. Write a design proposal first only when the work will serve many future projects, changes what users get, or takes more than a month of engineering time. Otherwise the step is ship now or a throwaway prototype.

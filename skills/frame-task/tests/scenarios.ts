@@ -54,6 +54,14 @@ export const scenarios = [
     remove: ["| Ship now", "| Throwaway prototype", "| Proposal first", "Then name one next step"],
   },
   {
+    id: "proposal-threshold",
+    evidence:
+      "Case A is a two-week change to one internal script, with clear value and low risk. Case B will serve many future projects. Case C changes what users get. Case D takes three months of engineering time. Return whether a design proposal comes first for each, as yes or no, comma-separated in order A,B,C,D with no spaces.",
+    expected: { proposalFirst: "no,yes,yes,yes" },
+    decisive: ["many future projects", "changes what users get", "more than a month of engineering time"],
+    remove: ["Write a design proposal first only when", "When none of the three holds"],
+  },
+  {
     id: "step-reason",
     evidence: "The frame names a next step. Return reasonRequired as yes or no.",
     expected: { reasonRequired: "yes" },

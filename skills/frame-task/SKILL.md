@@ -76,8 +76,10 @@ Then name one next step, sized to your confidence and to the cost of being wrong
 | ------------------- | ------------------------------------ |
 | Ship now            | Low risk and clear value             |
 | Throwaway prototype | The facts are uncertain              |
-| Proposal first      | The change is large and you are sure |
+| Proposal first      | The proposal threshold below is met  |
 
+Write a design proposal first only when the work will serve many future projects, changes what users get, or takes more than a month of engineering time.
+When none of the three holds, the step is ship now or a throwaway prototype.
 State the reason in one sentence. Do not pick a bigger step than the evidence supports.
 
 ## 7. Stop
