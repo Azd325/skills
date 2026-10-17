@@ -48,7 +48,7 @@ export const scenarios = [
   {
     id: "step-sizing",
     evidence:
-      "Case A is low risk with clear value. Case B has uncertain facts. Case C is large and the evidence is strong. Return the next step for each as ship-now, prototype or proposal, comma-separated in order A,B,C with no spaces.",
+      "Case A is low risk with clear value. Case B has uncertain facts. Case C takes three months of engineering time and the evidence is strong. Return the next step for each as ship-now, prototype or proposal, comma-separated in order A,B,C with no spaces.",
     expected: { steps: "ship-now,prototype,proposal" },
     decisive: ["ship now", "throwaway prototype", "proposal first"],
     remove: ["| Ship now", "| Throwaway prototype", "| Proposal first", "Then name one next step"],
