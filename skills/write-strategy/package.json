@@ -1,0 +1,20 @@
+{
+  "name": "write-strategy",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Write the decisions a repository keeps making as guiding policies, each with its reason and sources.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
