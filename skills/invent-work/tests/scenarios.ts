@@ -82,8 +82,16 @@ export const scenarios = [
     evidence:
       "Candidate A is leading/partial, but the tracker shows three teams and a director already on it. Candidate B is lagging/pre-argued with nobody on it. Neither is existential. Return order as their comma-separated IDs with no spaces.",
     expected: { order: "B,A" },
-    decisive: ["crowded", "ranks below every candidate with open room"],
-    remove: ["Check **room**", "others already crowd", "ranks below every candidate", "Room never changes"],
+    decisive: ["no open room", "ranks below every candidate with open room"],
+    remove: ["Check **room**", "ranks below every candidate", "Room never changes"],
+  },
+  {
+    id: "room-single-assignee",
+    evidence:
+      "Candidate A is leading/partial. The tracker shows one engineer assigned with a commit yesterday; no leadership interest. Candidate B is lagging/pre-argued with nobody on it. Neither is existential. Return order as their comma-separated IDs with no spaces.",
+    expected: { order: "B,A" },
+    decisive: ["One active assignee", "means no open room", "not a separate threshold"],
+    remove: ["One active assignee or one open pull", "not a separate threshold"],
   },
   {
     id: "room-existential",
@@ -91,7 +99,7 @@ export const scenarios = [
       "Candidate A is leading/partial and crowded by leadership; an incident ticket shows it puts the organisation at risk. Candidate B is lagging/pre-argued with open room. Return order as their comma-separated IDs with no spaces, and roomPenalty as applies or exempt for A.",
     expected: { order: "A,B", roomPenalty: "exempt" },
     decisive: ["existential", "exempt", "organisation is at risk"],
-    remove: ["An existential candidate", "the organisation is at risk", "Every crowded candidate"],
+    remove: ["An existential candidate", "the organisation is at risk", "Every candidate without open room"],
   },
   {
     id: "snacking",

@@ -71,9 +71,10 @@ request below every ranked candidate, to the Watching list, until corroborated. 
 signal from a different group: System, Users, Org or Industry. A watched item moves into the ranking
 when a second group raises the same problem.
 Check **room** for each candidate: is someone already working on it? The tracker shows this as an
-assignee, an open branch or pull request, or several teams on the ticket. Work that leadership and many
-others already crowd around is crowded. Room never changes a candidate's measures. A crowded candidate
-ranks below every candidate with open room, and the fixed order applies within each of the two groups.
+assignee with recent activity, or an open branch or pull request. One active assignee or one open pull
+request means no open room. Crowding by leadership and many others is the strongest case of the same
+thing, not a separate threshold. Room never changes a candidate's measures. A candidate with no open
+room ranks below every candidate with open room, and the fixed order applies within each of the two groups.
 An existential candidate is exempt: the organisation is at risk, so room does not lower it and the fixed
 order applies to it as usual. It needs tracker or incident evidence of that risk, and the report cites it.
 
@@ -94,7 +95,7 @@ Before reporting, self-check:
 2. The order follows the four-step rule, or states why corroboration changes a candidate's placement.
 3. Every source not reached is named.
 4. Every merged candidate names its split test.
-5. Every crowded candidate that ranks above open room is existential and cites the evidence.
+5. Every candidate without open room that ranks above open room is existential and cites the evidence.
 6. Every single-request item is listed under Watching or counted in its overflow line, never ranked or silently dropped.
 
 If evidence is too thin to rank, say which source to collect next instead of guessing.
