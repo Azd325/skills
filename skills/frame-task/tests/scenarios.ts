@@ -83,7 +83,15 @@ export const scenarios = [
       "The frame names a next step for a task that replaces an old report generator. Return doneCheck as a runnable-check or none, and kind as flow, property or differential.",
     expected: { doneCheck: "runnable-check", kind: "differential" },
     decisive: ["name one check that proves the step done", "differential"],
-    remove: ["Then name one check", "- **Differential:**", "- **Done when:**"],
+    remove: ["Then name one check", "- **Differential:**"],
+  },
+  {
+    id: "no-check-possible",
+    evidence:
+      "The frame covers a task with no observable output and no old system to compare against. Return doneCheck as runnable-check or none.",
+    expected: { doneCheck: "none" },
+    decisive: ["do not invent a check"],
+    remove: ["When no runnable check is possible yet"],
   },
   {
     id: "ranked-by-impact",
@@ -118,7 +126,7 @@ export const scenarios = [
   {
     id: "report-contract",
     evidence:
-      "Give the report structure in report (placeholders suffice). Include fields for problem, user and pain, assumptions, downside, scope cut, next step, ranked directions, unchecked assumptions and grounded versus assumed.",
+      "Give the report structure in report (placeholders suffice). Include fields for problem, user and pain, assumptions, downside, scope cut, next step, ranked directions, unchecked assumptions, done check and grounded versus assumed.",
     expected: { parts: "2" },
     decisive: ["Part 1 is safe to paste"],
     remove: [
@@ -130,6 +138,7 @@ export const scenarios = [
       "- **Downside if wrong:**",
       "- **Scope cut:**",
       "- **Next step:**",
+      "- **Done when:**",
       "**Directions",
       "**Unchecked assumptions",
       "**Grounded vs assumed:**",
@@ -139,6 +148,7 @@ export const scenarios = [
       "**Problem:**",
       "**Scope cut:**",
       "**Next step:**",
+      "**Done when:**",
       "**Directions",
       "**Unchecked assumptions",
       "**Grounded vs assumed:**",
