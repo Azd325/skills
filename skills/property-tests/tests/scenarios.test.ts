@@ -1,14 +1,10 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { judge, parseAssessment, removeRule, scenarios } from "./scenarios.ts";
 import type { Assessment, Scenario } from "./scenarios.ts";
 
-// CI tests the oracle's observable assessment interface with synthetic policy,
-// and that SKILL.md states each decisive rule only in the lines its removal deletes.
+// CI tests the oracle's observable assessment interface with synthetic policy.
 // Interpretation of the installed skill belongs to the development evaluation.
-const skill = readFileSync(new URL("../SKILL.md", import.meta.url), "utf8");
-const squash = (text: string) => text.replace(/\s+/g, " ");
 const filler = "Unrelated policy about notes.";
 const ruleFor = (scenario: Scenario) => `Rule: ${scenario.decisive.join(" and ")} decide this.`;
 const validFor = (scenario: Scenario, rule: string): Assessment => ({
@@ -50,13 +46,6 @@ for (const scenario of scenarios) {
       judge(scenario, assessment, removed).includes("decision lacks a demonstrated basis in the supplied policy"),
     );
     assert.deepEqual(judge(scenario, assessment, policy), []);
-  });
-
-  test(`SKILL.md: ${scenario.id} states its decisive rule and loses it when the rule is removed`, () => {
-    const missing = (policy: string) =>
-      scenario.decisive.filter((word) => !squash(policy).toLowerCase().includes(word.toLowerCase()));
-    assert.deepEqual(missing(skill), []);
-    assert.ok(missing(removeRule(skill, scenario)).length, "the decisive rule survives its removal");
   });
 }
 

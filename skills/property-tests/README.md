@@ -35,7 +35,7 @@ For one confirmed failure, use [failure-to-constraint](../failure-to-constraint/
 ## Tests
 
 Use Node 26 or later. At the repository root, run `pnpm install` and `pnpm run check`.
-CI checks installation in a fresh home, the frontmatter, the code fences, the scenario oracle, parser and rule-removal helper, and that `SKILL.md` states each decisive rule only in the lines that its removal deletes.
+CI checks installation in a fresh home, the frontmatter, the code fences, the scenario oracle, parser and rule-removal helper.
 These deterministic tests do not prove model interpretation and call no live model.
 
 For development-only evaluation with synthetic evidence:
