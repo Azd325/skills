@@ -1,0 +1,20 @@
+{
+  "name": "property-tests",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Write property-based and differential tests that state what must never break, with proof that each test can fail.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
