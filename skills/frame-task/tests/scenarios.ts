@@ -78,6 +78,14 @@ export const scenarios = [
     remove: ["State the reason"],
   },
   {
+    id: "done-check",
+    evidence:
+      "The frame names a next step for a task that replaces an old report generator. Return doneCheck as a runnable-check or none, and kind as flow, property or differential.",
+    expected: { doneCheck: "runnable-check", kind: "differential" },
+    decisive: ["name one check that proves the step done", "differential"],
+    remove: ["Then name one check", "- **Differential:**", "- **Done when:**"],
+  },
+  {
     id: "ranked-by-impact",
     evidence:
       "Fact X is easy to find and changes little. Fact Y is hard to find and changes the decision most. Return first as X or Y.",
