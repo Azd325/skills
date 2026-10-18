@@ -83,6 +83,15 @@ When none of the three holds, the step is ship now or a throwaway prototype.
 When the threshold is met but the facts are uncertain, the step is a throwaway prototype first.
 State the reason in one sentence. Do not pick a bigger step than the evidence supports.
 
+Then name one check that proves the step done. Choose the kind that fits the task:
+
+- **End-to-end flow:** a flow a real user performs, from the first action to the visible result.
+- **Property:** something that must never break, such as a round-trip, an invariant, idempotency or equivalence with a simple version.
+- **Differential:** a comparison with the output of the old system, when the task replaces one.
+
+Prefer a check that is fast and deterministic. Name the check, not its implementation.
+When no runnable check is possible yet, say so and name what is missing. Do not invent a check.
+
 ## 7. Stop
 
 Do not implement, even when the answer looks obvious. Hand back the frame. The developer decides.
@@ -100,6 +109,7 @@ Use this template. Part 1 is safe to paste into a PR or ticket. Part 2 is coachi
 - **Downside if wrong:** <blast radius>
 - **Scope cut:** not doing <X> now; signal that would change this: <Y>
 - **Next step:** <ship now | throwaway prototype | proposal first>, because <reason>
+- **Done when:** <the end-to-end flow, property or differential comparison that proves the step done | no runnable check yet; missing: <what>>
 
 **Directions (ranked by effect on the decision):**
 

@@ -1,7 +1,7 @@
 # frame-task
 
 Turns one fuzzy task into a decision before any code exists.
-The skill returns a five-line decision memo, a ranked list of the missing context, the unchecked assumptions in the framing and one next step sized to confidence: ship now, throwaway prototype or proposal first.
+The skill returns a decision memo, a ranked list of the missing context, the unchecked assumptions in the framing and one next step sized to confidence (ship now, throwaway prototype or proposal first) and the check that proves it done.
 
 It is a prompt-only skill: it recommends and enforces nothing.
 It writes no code and starts no work unless you ask.
