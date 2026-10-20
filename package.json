@@ -6,11 +6,12 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "node scripts/require-tests.ts && pnpm -r test",
+    "test": "node scripts/require-tests.ts && node --test scripts/*.test.ts && pnpm -r test",
     "check": "pnpm run format:check && pnpm run typecheck && pnpm run test",
     "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
-    "prettier": "3.9.9"
+    "prettier": "3.9.9",
+    "yaml": "^2.9.1"
   }
 }

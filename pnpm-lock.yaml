@@ -112,6 +112,9 @@ importers:
       prettier:
         specifier: 3.9.9
         version: 3.9.9
+      yaml:
+        specifier: ^2.9.1
+        version: 2.9.1
 
   plugins/quiet-mode:
     devDependencies:
@@ -332,6 +335,11 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
+  yaml@2.9.1:
+    resolution: {integrity: sha512-3NxN8+78OdzbT7C/WjGsyfPAtJaN3FNDsWxv7Y7mcDsT/oOmgW8BpyQQFFBnvZE3j9Y2Sdz1ULFLezL7Eb2yFw==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
 snapshots:
 
   '@types/node@26.6.3':
@@ -424,3 +432,5 @@ snapshots:
       '@typescript/typescript-win32-x64': 7.0.2
 
   undici-types@8.9.0: {}
+
+  yaml@2.9.1: {}
