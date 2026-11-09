@@ -1,0 +1,20 @@
+{
+  "name": "manage-up",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Draft one of four messages to your own boss. A win note, a pre-brief, an escalation draft or a Yes, if reply.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc -p .",
+    "evaluate": "node tests/evaluate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
