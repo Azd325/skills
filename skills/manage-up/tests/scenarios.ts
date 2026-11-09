@@ -89,10 +89,10 @@ export const scenarios = [
     evidence:
       "The user wants a Yes, if reply to a deadline. Return extras as omitted or recommendation-risk-confidence.",
     expected: { extras: "omitted" },
-    decisive: ["Keep the win note and the \"Yes, if\" reply short"],
+    decisive: ['Keep the win note and the "Yes, if" reply short'],
     remove: [
       "This applies to the escalation draft, and to a pre-brief that carries an ask.",
-      "Keep the win note and the \"Yes, if\" reply short.",
+      'Keep the win note and the "Yes, if" reply short.',
     ],
   },
   {
@@ -186,7 +186,8 @@ export const scenarios = [
   },
   {
     id: "return-shape",
-    evidence: "The draft is ready. Return the field returned as shape or prose. Put the report in the package's output shape.",
+    evidence:
+      "The draft is ready. Return the field returned as shape or prose. Put the report in the package's output shape.",
     expected: { returned: "shape" },
     decisive: ["Use this shape"],
     remove: ["Use this shape.", "**Format:**", "**Missing:**", "**Draft:**"],
