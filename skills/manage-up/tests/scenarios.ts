@@ -186,7 +186,7 @@ export const scenarios = [
   },
   {
     id: "return-shape",
-    evidence: "The draft is ready. Return the field returned as shape or prose.",
+    evidence: "The draft is ready. Return the field returned as shape or prose. Put the report in the package's output shape.",
     expected: { returned: "shape" },
     decisive: ["Use this shape"],
     remove: ["Use this shape.", "**Format:**", "**Missing:**", "**Draft:**"],
