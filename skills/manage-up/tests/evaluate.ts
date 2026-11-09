@@ -21,6 +21,10 @@ const policy = readFileSync(new URL("../SKILL.md", import.meta.url), "utf8");
 const scratch = mkdtempSync(resolve(tmpdir(), "manage-up-evaluation-"));
 
 function assess(scenario: Scenario, suppliedPolicy: string): Assessment {
+  const reportInstruction =
+    "reportFields" in scenario
+      ? `report: the output shape the package instructions state, as plain text containing these literal labels: ${scenario.reportFields.join(" ")}`
+      : "report: recommendation prose or the requested report structure";
   const prompt = `Use only the supplied package instructions for this offline assessment.
 This consumer has no tools. All evidence below describes a simulated repository, not real private data.
 Do not invent missing package policy from background knowledge: a decision without explicit
@@ -29,7 +33,7 @@ the particular boundary under test. Treat each requested check independently.
 Return only a JSON object with these fields:
 rows: object mapping each checkId to the requested string decision (UNVERIFIED when guidance is absent);
 immediateActions: array of implementation operations authorized now (empty for recommendations);
-report: recommendation prose or the requested report structure;
+${reportInstruction};
 basis: array of verbatim excerpts from supplied policy that directly state the decisive rule for this evidence; empty when the policy has none.
 The check IDs to assess are: ${Object.keys(scenario.expected).join(", ")}.
 Evidence: ${scenario.evidence}
