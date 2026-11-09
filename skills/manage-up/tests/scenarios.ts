@@ -81,8 +81,19 @@ export const scenarios = [
     id: "reader-need",
     evidence: "The draft asks the boss to decide. Return need as named or omitted.",
     expected: { need: "named" },
-    decisive: ["what you need from the reader"],
-    remove: ["Say what you need from the reader and by when."],
+    decisive: ["say what you need and by when"],
+    remove: ["When the draft asks the reader for something, say what you need and by when."],
+  },
+  {
+    id: "short-formats",
+    evidence:
+      "The user wants a Yes, if reply to a deadline. Return extras as omitted or recommendation-risk-confidence.",
+    expected: { extras: "omitted" },
+    decisive: ["Keep the win note and the \"Yes, if\" reply short"],
+    remove: [
+      "This applies to the escalation draft, and to a pre-brief that carries an ask.",
+      "Keep the win note and the \"Yes, if\" reply short.",
+    ],
   },
   {
     id: "recommendation",
