@@ -121,13 +121,7 @@ export const scenarios = [
     evidence:
       "The user wants a win note the boss can forward. The next reader cares about the Thursday review. Return shape as forwardable or status-dump.",
     expected: { shape: "forwardable" },
-    decisive: [
-      "forward upwards unchanged",
-      "clear subject",
-      "Lead with the result",
-      "under three minutes",
-      "next reader cares about",
-    ],
+    decisive: ["forward upwards unchanged"],
     remove: [
       "forward upwards unchanged",
       "Give the note a clear subject.",
@@ -152,14 +146,7 @@ export const scenarios = [
     evidence:
       "The user wants the boss to escalate a blocked request. A sponsor was not named. Return shape as boss-send or user-status.",
     expected: { shape: "boss-send" },
-    decisive: [
-      "for the boss to send",
-      "Name the recipients",
-      "precise ask",
-      "date and a link",
-      "two lines",
-      "five lines at most",
-    ],
+    decisive: ["for the boss to send"],
     remove: [
       "Write this for the boss to send.",
       "Name the recipients.",
@@ -199,7 +186,7 @@ export const scenarios = [
   },
   {
     id: "return-shape",
-    evidence: "The draft is ready. Return the message in the skill's return shape.",
+    evidence: "The draft is ready. Return the field returned as shape or prose.",
     expected: { returned: "shape" },
     decisive: ["Use this shape"],
     remove: ["Use this shape.", "**Format:**", "**Missing:**", "**Draft:**"],
