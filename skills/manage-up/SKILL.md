@@ -39,9 +39,11 @@ The result, the ask or the recommendation is the first line.
 Context follows.
 Write the draft in Simplified Technical English.
 Use short sentences, one fact in each, and the active voice.
-Say what you need from the reader and by when.
-Give a recommendation, the reason, the risk and the first step.
-Say how sure you are.
+When the draft asks the reader for something, say what you need and by when.
+When the draft asks the boss to decide, give a recommendation, the reason, the risk and the first step.
+In that draft, say how sure you are.
+This applies to the escalation draft, and to a pre-brief that carries an ask.
+Keep the win note and the "Yes, if" reply short.
 When you raise a problem, say why it matters and name the next action, or say to watch it for now.
 Answer the next question the reader will ask in the same message.
 
