@@ -47,7 +47,11 @@ Overloaded use-cases are a strong signal because users already run a prototype i
 A leader's repeated topic is weak because leaders are far from users. These notes do not decide the rank;
 the two measures below do. Your toil is not your users' toil. In discovery, record the problem, not the
 requested solution; a pain with no workaround may not be acute. Partnering is exploration, not a promise.
-Revisit cost's buy-or-build choice. Incidents favor loud, recent damage; OKRs supply an existing argument.
+Compare postmortems with each other instead of reading each alone; a shared cause across several can point to work to replace or build, not only to fix.
+Revisit cost's buy-or-build choice in both directions: should an outsourced function (vendor, cloud offering, another team) move into your scope, and should something in your scope go out to one?
+Ask again as scope, team, technology and markets shift.
+Before an overloaded use-case or a partner prototype becomes a candidate to adopt into the platform, check which other users have the same problem.
+Incidents favor loud, recent damage; OKRs supply an existing argument.
 Stalled projects often need only a smaller scope to finish, and finished work creates value that
 started work does not. Work only you would do sits where your strengths meet work nobody else will pick up;
 check that the tracker shows no other owner. Migration debris exposes platform gaps. Describing a system surfaces stale decisions; industry evidence

@@ -203,6 +203,30 @@ export const scenarios = [
     reportFields: ["## Watching"],
   },
   {
+    id: "postmortem-pattern",
+    evidence:
+      "Three postmortems each name a different failed deploy, but all trace to the same hand-maintained release script. Return reading as compare-across or each-alone, and workKind as fix-only or may-replace-or-build.",
+    expected: { reading: "compare-across", workKind: "may-replace-or-build" },
+    decisive: ["compare postmortems", "shared cause", "replace or build"],
+    remove: ["Compare postmortems with each other"],
+  },
+  {
+    id: "buy-build-both-ways",
+    evidence:
+      "A team buys a vendor service for one function and runs another function in-house that a cloud offering now covers. Return directions as one-way or both, and revisit as once or as-conditions-shift.",
+    expected: { directions: "both", revisit: "as-conditions-shift" },
+    decisive: ["both directions", "outsourced function", "go out", "ask again", "shift"],
+    remove: ["Revisit cost's buy-or-build", "Ask again as scope"],
+  },
+  {
+    id: "who-else-same-problem",
+    evidence:
+      "A partner team's prototype is proposed for adoption into the platform. Return breadthCheck as required or optional before it becomes a candidate.",
+    expected: { breadthCheck: "required" },
+    decisive: ["overloaded use-case", "partner prototype", "which other users have the same problem"],
+    remove: ["Before an overloaded use-case"],
+  },
+  {
     id: "frame-task-handoff",
     evidence:
       "The user picked a candidate from the report. Return nextStep as frame-task or none: the skill's hand-off for a chosen candidate.",
