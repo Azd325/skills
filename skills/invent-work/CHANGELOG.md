@@ -19,6 +19,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Treat a merged need as a hypothesis: the report names the test that would split the merged signals again.
 - Add a `## Watching` list for single requests, which move into the ranking when a second group raises the same problem; down-rank now means the Watching list.
 - Hand a chosen candidate to `frame-task`.
+- Compare postmortems with each other for a shared cause, which can point to work to replace or build as well as to fix.
+- Ask the cost buy-or-build question in both directions and again as scope, team, technology and markets shift.
+- Check which other users have the same problem before an overloaded use-case or a partner prototype becomes a candidate to adopt into the platform.
 - Installation and scenario oracle tests, rule-removal checks and a development-only model evaluation command.
 
 - `SKILL.md`: the invent-work skill. It collects candidate work from four signal sources, ranks it on two axes and reports at most five candidates with their evidence.
